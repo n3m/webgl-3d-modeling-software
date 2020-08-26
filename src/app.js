@@ -46,7 +46,11 @@ class Application {
   };
 
   main = () => {
+    /** Setup Controller */
     const GameControlMaster = new Controls(this);
+    /** Setup Init Render */
+    this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
+    this.gl.clear(this.gl.COLOR_BUFFER_BIT);
   };
 }
 

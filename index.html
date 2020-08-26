@@ -3,11 +3,23 @@
     <meta charset="utf-8" />
     <title>3D Modeling Software</title>
     <meta data-="Alan Enrique Maldonado Navarro">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
   </head>
   <body onload="Start()">
-    <canvas id="webgl" oncontextmenu="event.preventDefault();" width="800" height="800">
-      Please use a browser that supports canvas
-    </canvas>
+    <div class="ui raised very padded text center aligned container segment">
+      <h1 class="ui header">3D Modeling Software</h1>
+ 
+      <p class="ui ">
+        Alan Enrique Maldonado Navarro
+        <br>
+        V0.0.1
+      </p>
+    </div>
+    <div class="ui center aligned container">
+      <canvas id="webgl" oncontextmenu="event.preventDefault();" width="700" height="700">
+        Please use a browser that supports canvas
+      </canvas>
+    </div>
 
     <!-- LIB JS -->
     <script src="lib/webgl-utils.js"></script>
@@ -22,5 +34,6 @@
 
     <!-- Author: Alan Enrique Maldonado Navaro -->
     <!-- Date: 24-08-2020 -->
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   </body>
 </html>
