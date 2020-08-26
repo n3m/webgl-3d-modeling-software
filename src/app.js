@@ -2,6 +2,7 @@ class Application {
   Start = () => {
     console.log("= Application Start =");
     console.log("= Setup Initializing...");
+
     const canvas = document.querySelector("#webgl");
     if (!canvas) {
       console.error("Was not able to obtain the Canvas");
@@ -41,10 +42,12 @@ class Application {
     }
 
     console.log("= Setup Complete!");
-    main();
+    this.main();
   };
 
-  main = () => {};
+  main = () => {
+    const GameControlMaster = new Controls(this);
+  };
 }
 
 const Start = () => {
