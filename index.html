@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
-  <>
     <meta charset="utf-8" />
     <title>3D Modeling Software</title>
     <meta data-="Alan Enrique Maldonado Navarro">
   </head>
   <body onload="Start()">
-    <canvas id="webgl" width="1000" height="1000">
+    <canvas id="webgl" oncontextmenu="event.preventDefault();" width="800" height="800">
       Please use a browser that supports canvas
     </canvas>
 
@@ -14,8 +13,10 @@
     <script src="lib/webgl-utils.js"></script>
     <script src="lib/webgl-debug.js"></script>
     <script src="lib/cuon-utils.js"></script>
+    <script src="lib/cuon-matrix.js"></script>
     <!-- SRC JS -->
     <script src="src/shaders.js"></script>
+    <script src="src/controls.js"></script>
     <script src="src/app.js"></script>
    
 
