@@ -17,43 +17,48 @@ class Controls {
       console.error("\t> Was not able to obtain the Canvas");
       return;
     } else {
-      console.log("\t> Obtained Canvas");
+      // console.log("\t> Obtained Canvas");
     }
 
-    canvas.addEventListener("mousedown", (e) => {
-      switch (e.button) {
-        case 0: //Left Click
-          console.log("Left Click");
-          break;
-        case 1: //Middle Click
-          console.log("Middle Click");
-          break;
-        case 2: //Right Click
-          e.preventDefault();
-          console.log("Right Click");
-          break;
-        default:
-          console.error("Default Case in MouseDown Event Listener");
-      }
-    });
+    // canvas.addEventListener("mousedown", (e) => {
+    //   switch (e.button) {
+    //     case 0: //Left Click
+    //       console.log("Left Click");
+    //       break;
+    //     case 1: //Middle Click
+    //       console.log("Middle Click");
+    //       break;
+    //     case 2: //Right Click
+    //       e.preventDefault();
+    //       console.log("Right Click");
+    //       break;
+    //     default:
+    //       console.error("Default Case in MouseDown Event Listener");
+    //   }
+    // });
 
-    canvas.addEventListener("keydown", (e) => {
+    document.addEventListener("keydown", (e) => {
       switch (event.keyCode) {
         case 81:
           //Rotate Mode
-          console.log("Rotate Mode Enabled");
+          GlobalStorage.CurrentMode = "ROTATION";
+          console.log("ROTATION Mode Enabled");
           break;
         case 82:
-          //Rotate Mode
-          console.log("Rotate Mode Enabled");
+          //Scale Mode
+          GlobalStorage.CurrentMode = "SCALE";
+          console.log("SCALE Mode Enabled");
           break;
         case 87:
-          //Reposition Mode
-          console.log("Reposition Mode Enabled");
+          //MOVEMENT Mode
+          GlobalStorage.CurrentMode = "MOVEMENT";
+          console.log("MOVEMENT Mode Enabled");
           break;
         case 27:
-          //Reposition Mode
-          console.log("Exit Key");
+          //Creation Mode
+          GlobalStorage.CurrentMode = "CREATION";
+          console.log("CREATION Mode Enabled");
+          $("#documentation").html(documentationCreation);
           break;
         default:
           break;
@@ -61,3 +66,27 @@ class Controls {
     });
   };
 }
+
+const documentationCreation = `
+<div>
+   <hr>
+   <h1>Creation Mode</h1>
+   <hr>
+   <p>
+      In this mode, you're able to create any kind Object.
+   </p>
+   <p>
+      Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
+   </p>
+   <p>
+      Pressing the "Right Click" anywhere in the canvas, will save the current Object and start a new
+      one.
+   </p>
+   <p>
+      Scrolling "Up" or "Down", will modify the Z Index of the next Vertex placed with a "Left Click".
+   </p>
+   <hr>
+   <h2>Current Data</h2>
+   ${GlobalStorage.CREATION_DATA.z_index}
+</div>
+`;
