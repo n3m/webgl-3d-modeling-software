@@ -1,58 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-   <meta charset="utf-8" />
-   <title>3D Modeling Software</title>
-   <meta data-="Alan Enrique Maldonado Navarro">
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-   <link rel="stylesheet" href="style.css">
-   </head>
-   <body onload="Start()">
-      <div class="ui two column stackable grid">
-         <div class="two column row">
-            <div class="column">
-               <div class="ui" style="background-color: transparent;">
-                  <div class="ui center aligned container">
-                     <canvas id="webgl" oncontextmenu="event.preventDefault();" width="600" height="600">
-                        Please use a browser that supports canvas
-                     </canvas>
-                  </div>
+<meta charset="utf-8" />
+<title>3D Modeling Software</title>
+<meta data-="Alan Enrique Maldonado Navarro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="Start()">
+   <!-- LIB JS -->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+   <script src="lib/webgl-utils.js"></script>
+   <script src="lib/webgl-debug.js"></script>
+   <script src="lib/cuon-utils.js"></script>
+   <script src="lib/cuon-matrix.js"></script>
+   <!-- SRC JS -->
+   <script src="src/global.js"></script>
+   <script src="src/helpers/helpers.js"></script>
+   <script src="src/shaders.js"></script>
+   <script src="src/models.js"></script>
+   <script src="src/controls.js"></script>
+   <script src="src/app.js"></script>
+   <!-- Body Start -->
+   <div class="ui two column stackable grid">
+      <div class="two column row">
+         <div class="column">
+            <div class="ui" style="background-color: transparent;">
+               <div class="ui center aligned container">
+                  <canvas id="webgl" oncontextmenu="event.preventDefault();" width="600" height="600">
+                     Please use a browser that supports canvas
+                  </canvas>
                </div>
             </div>
-            <div class="column">
-               <div class="ui segment">
-                  <div class="ui raised very padded text center aligned container segment fluid">
-                     <h1 class="ui header">3D Modeling Software</h1>
-                     <p class="ui ">
-                        Alan Enrique Maldonado Navarro
-                        <br>
-                        V0.0.1
-                     </p>
-                     <div>
-                        <input type="color" id="colorP" name="head"
-                           value="#e66465">
-                        <label for="head">Current Color</label>
+         </div>
+         <div class="column">
+            <div class="ui segment">
+               <h1 class="ui header">3D Modeling Software</h1>
+               <p class="ui ">
+                  Alan Enrique Maldonado Navarro
+                  <br>
+                  V0.0.1
+               </p>
+               <br>
+               <div id="controls">
+                  <div class="ui statistics">
+                     <div class="statistic">
+                        <div class="text value">
+                           ESC
+                        </div>
+                        <div class="label">
+                           Creation Mode
+                        </div>
                      </div>
-                     <br>
+                     <div class="statistic">
+                        <div class="text value">
+                           Q
+                        </div>
+                        <div class="label">
+                           Rotation Mode
+                        </div>
+                     </div>
+                     <div class="statistic">
+                        <div class="text value">
+                           W
+                        </div>
+                        <div class="label">
+                           Movement Mode
+                        </div>
+                     </div>
+                     <div class="statistic">
+                        <div class="text value">
+                           R
+                        </div>
+                        <div class="label">
+                           Scale Mode
+                        </div>
+                     </div>
                   </div>
-                  <h3 class="ui header">How to</h3>
-                  <p>To start creating figures into the Canvas, please activate "Editor Mode" (is Off by default)</p>
+               </div>
+               <div id="documentation">
                </div>
             </div>
          </div>
       </div>
-      <!-- LIB JS -->
-      <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-      <script src="lib/webgl-utils.js"></script>
-      <script src="lib/webgl-debug.js"></script>
-      <script src="lib/cuon-utils.js"></script>
-      <script src="lib/cuon-matrix.js"></script>
-      <!-- SRC JS -->
-      <script src="src/helpers/helpers.js"></script>
-      <script src="src/shaders.js"></script>
-      <script src="src/controls.js"></script>
-      <script src="src/app.js"></script>
-      <!-- Author: Alan Enrique Maldonado Navaro -->
-      <!-- Date: 24-08-2020 -->
-   </body>
+   </div>
+
+   <!-- Author: Alan Enrique Maldonado Navaro -->
+   <!-- Date: 24-08-2020 -->
+</body>
+
 </html>
