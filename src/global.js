@@ -18,7 +18,6 @@ const GlobalAddObject = (CObject) => {
     position: "bottom left",
     className: "success",
   });
-  console.log("GlobalStorage", GlobalStorage);
 };
 
 const GlobalFindObject = (id) => {

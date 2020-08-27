@@ -21,18 +21,19 @@ class Controls {
     }
 
     $("document").ready(() => {
+      $(".ui.dropdown").dropdown();
       switch (GlobalStorage.CurrentMode) {
         case CREATIONSTATE:
           $("#documentation").html(getCreationDocs(GlobalStorage.create.z));
           break;
         case ROTATESTATE:
-          $("#documentation").html(documentationRotation);
+          $("#documentation").html(getRotationDocs());
           break;
         case SCALESTATE:
-          $("#documentation").html(documentationScaling);
+          $("#documentation").html(getScalingDocs());
           break;
         case MOVEMENTSTATE:
-          $("#documentation").html(documentationTranslation);
+          $("#documentation").html(getTranslationDocs());
           break;
       }
     });
@@ -43,19 +44,20 @@ class Controls {
           //Rotate Mode
           GlobalStorage.CurrentMode = "ROTATION";
           console.log("ROTATION Mode Enabled");
-          $("#documentation").html(documentationRotation);
+          $("#documentation").html(getRotationDocs());
+          $(".ui.dropdown").dropdown();
           break;
         case 82:
           //Scale Mode
           GlobalStorage.CurrentMode = "SCALE";
           console.log("SCALE Mode Enabled");
-          $("#documentation").html(documentationScaling);
+          $("#documentation").html(getScalingDocs());
           break;
         case 87:
           //MOVEMENT Mode
           GlobalStorage.CurrentMode = "MOVEMENT";
           console.log("MOVEMENT Mode Enabled");
-          $("#documentation").html(documentationTranslation);
+          $("#documentation").html(getTranslationDocs());
           break;
         case 27:
           //Creation Mode
@@ -70,9 +72,20 @@ class Controls {
   };
 
   UpdateCreationInfo = () => {
-    const documentationCreation = $("#documentation").html(
-      getCreationDocs(GlobalStorage.create.z)
-    );
+    switch (GlobalStorage.CurrentMode) {
+      case CREATIONSTATE:
+        $("#documentation").html(getCreationDocs(GlobalStorage.create.z));
+        break;
+      case ROTATESTATE:
+        $("#documentation").html(getRotationDocs());
+        break;
+      case SCALESTATE:
+        $("#documentation").html(getScalingDocs());
+        break;
+      case MOVEMENTSTATE:
+        $("#documentation").html(getTranslationDocs());
+        break;
+    }
   };
 }
 
@@ -104,68 +117,83 @@ const getCreationDocs = (val) => {
   `;
 };
 
-const documentationRotation = `
-<div>
-  <hr>
-  <h1>Rotation Mode</h1>
-  <hr>
-  <p>
-    In this mode, you're able to create any kind Object.
-  </p>
-  <p>
-    Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
-  </p>
-  <p>
-    Pressing the "Right Click" anywhere in the canvas, will save the current Object and start a new
-    one.
-  </p>
-  <p>
-    Scrolling "Up" or "Down", will modify the Z Index of the next Vertex placed with a "Left Click".
-  </p>
-  
-</div>
+const getRotationDocs = () => {
+  return `
+  <div>
+    <hr>
+    <h1>Rotation Mode</h1>
+    <hr>
+    <p>
+      In this mode, you're able to create any kind Object.
+    </p>
+    <p>
+      Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
+    </p>
+    <hr>
+    <br>
+    ${getCurrentAvailableObjects()}
+    
+  </div>
+  `;
+};
+
+const getScalingDocs = () => {
+  return `
+  <div>
+    <hr>
+    <h1>Scaling Mode</h1>
+    <hr>
+    <p>
+      In this mode, you're able to create any kind Object.
+    </p>
+    <p>
+      Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
+    </p>
+    <hr>
+    <br>
+    ${getCurrentAvailableObjects()}
+    
+  </div>
+  `;
+};
+
+const getTranslationDocs = () => {
+  return `
+  <div>
+    <hr>
+    <h1>Translation Mode</h1>
+    <hr>
+    <p>
+      In this mode, you're able to create any kind Object.
+    </p>
+    <p>
+      Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
+    </p>
+    <hr>
+    <br>
+    ${getCurrentAvailableObjects()}
+    
+  </div>
+  `;
+};
+
+const getCurrentAvailableObjects = () => {
+  let data = `
+  <div class="ui selection dropdown" onClick="$('.ui.dropdown').dropdown()">
+    <input type="hidden" name="objects">
+    <i class="dropdown icon"></i>
+    <div class="default text">Select an Object</div>
+    <div class="menu">
 `;
 
-const documentationScaling = `
-<div>
-  <hr>
-  <h1>Scaling Mode</h1>
-  <hr>
-  <p>
-    In this mode, you're able to create any kind Object.
-  </p>
-  <p>
-    Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
-  </p>
-  <p>
-    Pressing the "Right Click" anywhere in the canvas, will save the current Object and start a new
-    one.
-  </p>
-  <p>
-    Scrolling "Up" or "Down", will modify the Z Index of the next Vertex placed with a "Left Click".
-  </p>
-  
-</div>
-`;
+  for (let i = 0; i < GlobalStorage.Objects.length; i++) {
+    const element = GlobalStorage.Objects[i];
+    data += `<div class="item" data-value="${element.id}">Object #${i}</div>`;
+  }
 
-const documentationTranslation = `
-<div>
-  <hr>
-  <h1>Translation Mode</h1>
-  <hr>
-  <p>
-    In this mode, you're able to create any kind Object.
-  </p>
-  <p>
-    Pressing the "Left Click" anywhere in the canvas, will create a vertex for the current object.
-  </p>
-  <p>
-    Pressing the "Right Click" anywhere in the canvas, will save the current Object and start a new
-    one.
-  </p>
-  <p>
-    Scrolling "Up" or "Down", will modify the Z Index of the next Vertex placed with a "Left Click".
-  </p>
-  
-</div>
-`;
+  data += `
+    </div>
+  </div>
+  `;
+  return data;
+};

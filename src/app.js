@@ -139,7 +139,7 @@ class Application {
       this.CREATION_OBJ_INSTANCE.pushColor(RGB.r, RGB.g, RGB.b);
       $.notify("Added Vertex to Object!", {
         position: "bottom left",
-        className: "success",
+        className: "warn",
       });
       return;
     }
