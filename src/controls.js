@@ -36,5 +36,28 @@ class Controls {
           console.error("Default Case in MouseDown Event Listener");
       }
     });
+
+    canvas.addEventListener("keydown", (e) => {
+      switch (event.keyCode) {
+        case 81:
+          //Rotate Mode
+          console.log("Rotate Mode Enabled");
+          break;
+        case 82:
+          //Rotate Mode
+          console.log("Rotate Mode Enabled");
+          break;
+        case 87:
+          //Reposition Mode
+          console.log("Reposition Mode Enabled");
+          break;
+        case 27:
+          //Reposition Mode
+          console.log("Exit Key");
+          break;
+        default:
+          break;
+      }
+    });
   };
 }
