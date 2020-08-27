@@ -98,8 +98,6 @@ class Application {
         default:
           break;
       }
-
-      console.log("this.CREATION_OBJ_INSTANCE", this.CREATION_OBJ_INSTANCE);
     });
 
     document.addEventListener("keydown", (e) => {
@@ -125,6 +123,7 @@ class Application {
   };
 
   _leftClick = (ev) => {
+    /** CREATION */
     if (GlobalStorage.CurrentMode === CREATIONSTATE) {
       console.log(CREATIONSTATE + " > Left Click");
 
@@ -144,8 +143,15 @@ class Application {
 
   _rightClick(ev) {
     if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-      console.log(CREATIONSTATE + "Right Click");
-      return;
+      console.log(CREATIONSTATE + " > Right Click");
+      if (this.CREATION_OBJ_INSTANCE.getVertices().length >= 9) {
+        GlobalAddObject(this.CREATION_OBJ_INSTANCE);
+        this.CREATION_OBJ_INSTANCE = null;
+        return;
+      } else {
+        console.error("Cannot add Object! There's not enough Vertices");
+        return;
+      }
     }
   }
 }
