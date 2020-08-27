@@ -9,12 +9,12 @@ class CustomObject {
     return this.id;
   };
 
-  pushCoord = (x, y, z) => {
+  pushVertex = (x, y, z) => {
     this.tempVertexArray.push(x);
     this.tempVertexArray.push(y);
     this.tempVertexArray.push(z);
 
-    console.log(`\t[${this.id}] New Vertex > (${x},${y},${z})`);
+    console.log(`\tNew Vertex > (${x},${y},${z})`);
   };
 
   pushColor = (r, g, b) => {
@@ -22,7 +22,7 @@ class CustomObject {
     this.tempColorArray.push(g);
     this.tempColorArray.push(b);
 
-    console.log(`\t[${this.id}] New Color > (${r},${g},${b})`);
+    console.log(`\t New Color > (${r},${g},${b})`);
   };
 
   getVertices = () => {

@@ -62,8 +62,9 @@ class Application {
 
   main = () => {
     /** Setup Controller */
-    this._setup_controls();
     const GameControlMaster = new Controls(this);
+    this.GCMaster = GameControlMaster;
+    this._setup_controls();
     /** Setup Init Render */
 
     /** End Params */
@@ -79,7 +80,10 @@ class Application {
   _setup_controls = () => {
     this.CREATION_OBJ_INSTANCE = null;
     this.canvas.addEventListener("mousedown", (e) => {
-      if (GlobalStorage.CurrentMode === CREATIONSTATE) {
+      if (
+        GlobalStorage.CurrentMode === CREATIONSTATE &&
+        this.CREATION_OBJ_INSTANCE === null
+      ) {
         this.CREATION_OBJ_INSTANCE = new CustomObject();
       }
 
@@ -89,30 +93,28 @@ class Application {
           break;
         case 2: //Right Click
           e.preventDefault();
-
-          if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-            console.log("Right Click");
-            break;
-          }
+          this._rightClick(e);
           break;
         default:
           break;
       }
+
+      console.log("this.CREATION_OBJ_INSTANCE", this.CREATION_OBJ_INSTANCE);
     });
 
     document.addEventListener("keydown", (e) => {
       switch (event.keyCode) {
         case 38: //A_Up
           if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-            GlobalStorage.CREATION_DATA.z_index++;
-            console.log("Z++");
+            GlobalStorage.create.z++;
+            this.GCMaster.UpdateCreationInfo();
             break;
           }
           break;
         case 40: //A_Down
           if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-            GlobalStorage.CREATION_DATA.z_index--;
-            console.log("Z--");
+            GlobalStorage.create.z--;
+            this.GCMaster.UpdateCreationInfo();
             break;
           }
           break;
@@ -124,11 +126,28 @@ class Application {
 
   _leftClick = (ev) => {
     if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-      console.log("Left Click");
-      this.CREATION_OBJ_INSTANCE.pushVertex();
-      break;
+      console.log(CREATIONSTATE + " > Left Click");
+
+      var x = ev.clientX;
+      var y = ev.clientY;
+      var rect = ev.target.getBoundingClientRect();
+
+      x = (x - rect.left - this.canvas.width / 2) / (this.canvas.width / 2);
+      y = (this.canvas.height / 2 - (y - rect.top)) / (this.canvas.height / 2);
+
+      let RGB = hexToRgb($("#colorPicker")[0].value);
+      this.CREATION_OBJ_INSTANCE.pushVertex(x, y, GlobalStorage.create.z);
+      this.CREATION_OBJ_INSTANCE.pushColor(RGB.r, RGB.g, RGB.b);
+      return;
     }
   };
+
+  _rightClick(ev) {
+    if (GlobalStorage.CurrentMode === CREATIONSTATE) {
+      console.log(CREATIONSTATE + "Right Click");
+      return;
+    }
+  }
 }
 
 const Start = () => {

@@ -6,7 +6,7 @@ const MOVEMENTSTATE = "MOVEMENT";
 const GlobalStorage = {
   CurrentMode: CREATIONSTATE,
   Objects: [],
-  CREATION_DATA: {
-    z_index: 0,
+  create: {
+    z: 0,
   },
 };
