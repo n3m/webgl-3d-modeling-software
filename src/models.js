@@ -14,7 +14,7 @@ class CustomObject {
     this.tempVertexArray.push(y);
     this.tempVertexArray.push(z);
 
-    console.log(`\tNew Vertex > (${x},${y},${z})`);
+    // console.log(`\tNew Vertex > (${x},${y},${z})`);
   };
 
   pushColor = (r, g, b) => {
@@ -22,7 +22,7 @@ class CustomObject {
     this.tempColorArray.push(g);
     this.tempColorArray.push(b);
 
-    console.log(`\t New Color > (${r},${g},${b})`);
+    // console.log(`\t New Color > (${r},${g},${b})`);
   };
 
   getVertices = () => {

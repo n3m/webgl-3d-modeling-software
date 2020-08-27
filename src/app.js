@@ -137,6 +137,10 @@ class Application {
       let RGB = hexToRgb($("#colorPicker")[0].value);
       this.CREATION_OBJ_INSTANCE.pushVertex(x, y, GlobalStorage.create.z);
       this.CREATION_OBJ_INSTANCE.pushColor(RGB.r, RGB.g, RGB.b);
+      $.notify("Added Vertex to Object!", {
+        position: "bottom left",
+        className: "success",
+      });
       return;
     }
   };
@@ -149,7 +153,14 @@ class Application {
         this.CREATION_OBJ_INSTANCE = null;
         return;
       } else {
-        console.error("Cannot add Object! There's not enough Vertices");
+        $.notify(
+          "Cannot add Object! There's not enough Vertices in the current Object!",
+          {
+            position: "bottom left",
+            className: "error",
+          }
+        );
+        // console.error("Cannot add Object! There's not enough Vertices");
         return;
       }
     }

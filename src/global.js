@@ -14,6 +14,10 @@ const GlobalStorage = {
 const GlobalAddObject = (CObject) => {
   GlobalStorage.Objects.push(CObject);
 
+  $.notify("Current Object has been saved!", {
+    position: "bottom left",
+    className: "success",
+  });
   console.log("GlobalStorage", GlobalStorage);
 };
 
