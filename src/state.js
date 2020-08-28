@@ -3,10 +3,18 @@ class State {
     this.storage = {
       objectArray: [],
     };
+    this.lastValues = {
+      lastColorPickerValue: "#C8FF00",
+      lastScaleValue: 1,
+      lastAngleXValue: 0,
+      lastAngleYValue: 0,
+      lastAngleZValue: 0,
+      lastTransXValue: 0,
+      lastTransYValue: 0,
+      lastTransZValue: 0,
+    };
     this.editor = {
       zIndex: 0,
-      angle: 0,
-      rotAxis: [1, 0, 0],
       modelCount: 0,
       vertexCount: 0,
       activeModel: false,
