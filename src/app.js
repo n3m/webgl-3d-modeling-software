@@ -80,13 +80,6 @@ class Application {
   _setup_controls = () => {
     this.CREATION_OBJ_INSTANCE = null;
     this.canvas.addEventListener("mousedown", (e) => {
-      if (
-        GlobalStorage.CurrentMode === CREATIONSTATE &&
-        this.CREATION_OBJ_INSTANCE === null
-      ) {
-        this.CREATION_OBJ_INSTANCE = new CustomObject();
-      }
-
       switch (e.button) {
         case 0: //Left Click
           this._leftClick(e);
