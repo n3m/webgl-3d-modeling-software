@@ -1,13 +1,8 @@
-class CustomObject {
+class Surface {
   constructor() {
-    this.id = uuidv4();
     this.tempVertexArray = [];
     this.tempColorArray = [];
   }
-
-  getID = () => {
-    return this.id;
-  };
 
   pushVertex = (x, y, z) => {
     this.tempVertexArray.push(x);
@@ -28,7 +23,22 @@ class CustomObject {
   getVertices = () => {
     return new Float32Array(this.tempVertexArray);
   };
+
   getColors = () => {
     return new Float32Array(this.tempColorArray);
+  };
+}
+
+class Model {
+  constructor() {
+    this.surfaceArray = [];
+  }
+
+  pushSurface = (surface) => {
+    this.surfaceArray.push(surface);
+  };
+
+  getSurfaces = () => {
+    return this.surfaceArray;
   };
 }

@@ -1,5 +1,3 @@
-const _State = new State();
-
 /**
  * Tasks:
  *  - Create 3D Figures
@@ -63,32 +61,25 @@ class Application {
   };
 
   main = () => {
-    /** Setup Controller */
-    const GameControlMaster = new Controls(this);
-    this.GCMaster = GameControlMaster;
+    /** Setup Controls */
+    UIRender.Refresh();
     this._setup_controls();
-    /** Setup Init Render */
 
-    /** End Params */
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.depthFunc(this.gl.LESS);
     this.gl.clearColor(0.0, 0.0, 0.0, 1.0);
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
+    /** Setup Init Render */
     this.render();
   };
 
   render = () => {};
 
   _setup_controls = () => {
-    this.CREATION_OBJ_INSTANCE = null;
     this.canvas.addEventListener("mousedown", (e) => {
       switch (e.button) {
         case 0: //Left Click
           this._leftClick(e);
-          break;
-        case 2: //Right Click
-          e.preventDefault();
-          this._rightClick(e);
           break;
         default:
           break;
@@ -98,18 +89,12 @@ class Application {
     document.addEventListener("keydown", (e) => {
       switch (event.keyCode) {
         case 38: //A_Up
-          if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-            GlobalStorage.create.z++;
-            this.GCMaster.UpdateCreationInfo();
-            break;
-          }
+          _State.updateZ(1);
+          UIRender.Refresh();
           break;
         case 40: //A_Down
-          if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-            GlobalStorage.create.z--;
-            this.GCMaster.UpdateCreationInfo();
-            break;
-          }
+          _State.updateZ(-1);
+          UIRender.Refresh();
           break;
         default:
           break;
@@ -118,48 +103,33 @@ class Application {
   };
 
   _leftClick = (ev) => {
-    /** CREATION */
-    if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-      console.log(CREATIONSTATE + " > Left Click");
+    if (_State.editor.activeSurface) {
+      let x = ev.clientX;
+      let y = ev.clientY;
+      let z = _State.getZ();
 
-      var x = ev.clientX;
-      var y = ev.clientY;
-      var rect = ev.target.getBoundingClientRect();
-
+      let rect = ev.target.getBoundingClientRect();
       x = (x - rect.left - this.canvas.width / 2) / (this.canvas.width / 2);
       y = (this.canvas.height / 2 - (y - rect.top)) / (this.canvas.height / 2);
 
       let RGB = hexToRgb($("#colorPicker")[0].value);
-      this.CREATION_OBJ_INSTANCE.pushVertex(x, y, GlobalStorage.create.z);
-      this.CREATION_OBJ_INSTANCE.pushColor(RGB.r, RGB.g, RGB.b);
-      $.notify("Added Vertex to Object!", {
+
+      _State.Surface.pushVertex(x, y, z);
+      _State.Surface.pushColor(RGB.r, RGB.g, RGB.b);
+      _State.increaseVertexCount();
+      $.notify("Added Vertex to Surface!", {
         position: "bottom left",
         className: "warn",
       });
-      return;
+    } else {
+      $.notify("No Active Surface to create Vertices!", {
+        position: "bottom left",
+        className: "error",
+      });
     }
+    UIRender.Refresh();
+    return;
   };
-
-  _rightClick(ev) {
-    if (GlobalStorage.CurrentMode === CREATIONSTATE) {
-      console.log(CREATIONSTATE + " > Right Click");
-      if (this.CREATION_OBJ_INSTANCE.getVertices().length >= 9) {
-        GlobalAddObject(this.CREATION_OBJ_INSTANCE);
-        this.CREATION_OBJ_INSTANCE = null;
-        return;
-      } else {
-        $.notify(
-          "Cannot add Object! There's not enough Vertices in the current Object!",
-          {
-            position: "bottom left",
-            className: "error",
-          }
-        );
-        // console.error("Cannot add Object! There's not enough Vertices");
-        return;
-      }
-    }
-  }
 }
 
 const Start = () => {

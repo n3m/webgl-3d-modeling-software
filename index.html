@@ -1,27 +1,101 @@
 <!DOCTYPE html>
 <html lang="en">
-<meta charset="utf-8" />
-<title>3D Modeling Software</title>
-<meta data-="Alan Enrique Maldonado Navarro">
+
+<head>
+   <meta charset="utf-8" />
+   <title>3D Modeling Software</title>
+   <meta data-="Alan Enrique Maldonado Navarro">
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   <link rel="stylesheet" href="style.css">
 </head>
 
 <body onload="Start()">
    <!-- LIB JS -->
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+      crossorigin="anonymous"></script>
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+      integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+      crossorigin="anonymous"></script>
    <script src="lib/notify.min.js"></script>
    <script src="lib/webgl-utils.js"></script>
    <script src="lib/webgl-debug.js"></script>
    <script src="lib/cuon-utils.js"></script>
    <script src="lib/cuon-matrix.js"></script>
    <!-- SRC JS -->
+   <script src="src/helpers/helpers.js"></script>
    <script src="src/shaders.js"></script>
-   <script src="src/models.js"></script>
    <script src="src/state.js"></script>
+   <script src="src/models.js"></script>
+   <script src="src/render.js"></script>
+   <script src="src/ui.js"></script>
    <script src="src/app.js"></script>
    <!-- Body Start -->
-   <canvas id="webgl" oncontextmenu="event.preventDefault();" width="700" height="700">
-      Please use a browser that supports canvas
-   </canvas>
+   <div class="container">
+      <div class="container">
+         <div class="row">
+            <div class="col-sm" style="text-align: center;">
+               <div id="modelEditor" class="btn-group-vertical">
+
+               </div>
+               <hr>
+               <div id="surfaceEditor" class="btn-group-vertical">
+
+               </div>
+               <hr>
+               <div id="info-data">
+
+               </div>
+            </div>
+            <div class="col-sm">
+               <canvas id="webgl" oncontextmenu="event.preventDefault();" width="600" height="600">
+                  Please use a browser that supports canvas
+               </canvas>
+            </div>
+            <div class="col-sm" style="text-align: center;">
+               <h1>Translation</h1>
+               <hr>
+               <div id="translationEditor">
+                  <h3>X:</h3>
+                  <input type="range" id="xTransalation" max="5" min="-5" value="0">
+                  <hr>
+                  <h3>Y:</h3>
+                  <input type="range" id="yTransalation" max="5" min="-5" value="0">
+                  <hr>
+                  <h3>Z:</h3>
+                  <input type="range" id="zTransalation" max="5" min="-5" value="0">
+               </div>
+            </div>
+         </div>
+      </div>
+      <hr>
+      <div class="container">
+         <div class="row">
+            <div class="col-sm" style="text-align: center;">
+               <h1>Scaling</h1>
+               <hr>
+               <div id="scalingEditor">
+                  <input type="range" id="scale" max="5" min="-5" value="0">
+               </div>
+            </div>
+            <div class="col-sm" style="text-align: center;">
+               <h1>Rotation</h1>
+               <hr>
+               <div id="rotationEditor">
+                  <label>X:</label>
+                  <input type="range" id="xRotation" max="5" min="-5" value="0">
+                  <label>Y:</label>
+                  <input type="range" id="yRotation" max="5" min="-5" value="0">
+                  <label>Z:</label>
+                  <input type="range" id="zRotation" max="5" min="-5" value="0">
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+
 
 
    <!-- Author: Alan Enrique Maldonado Navaro -->
