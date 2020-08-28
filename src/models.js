@@ -21,10 +21,17 @@ class Surface {
   };
 
   getVertices = () => {
+    return this.tempVertexArray;
+  };
+
+  getParsedVertices = () => {
     return new Float32Array(this.tempVertexArray);
   };
 
   getColors = () => {
+    return this.tempColorArray;
+  };
+  getParsedColors = () => {
     return new Float32Array(this.tempColorArray);
   };
 }
@@ -38,7 +45,21 @@ class Model {
     this.surfaceArray.push(surface);
   };
 
-  getSurfaces = () => {
-    return this.surfaceArray;
+  getAllVertices = () => {
+    let vert = [];
+
+    this.surfaceArray.map((sur) => {
+      vert = [...vert, sur.getVertices()];
+    });
+    return vert;
+  };
+
+  getAllColors = () => {
+    let col = [];
+
+    this.surfaceArray.map((sur) => {
+      col = [...col, sur.getColors()];
+    });
+    return col;
   };
 }

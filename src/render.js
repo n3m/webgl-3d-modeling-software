@@ -10,10 +10,9 @@ class UIRender {
     $("#modelEditor").html(refreshModelEditorButtons());
     $("#surfaceEditor").html(refreshSurfaceEditorButtons());
 
-    $("#translationEditor").html();
-    $("#scalingEditor").html();
-    $("#rotationEditor").html();
-    $("#rotationEditor").html();
+    $("#translationEditor").html(refreshTranslationEditor());
+    $("#scalingEditor").html(refreshScaleEditor());
+    $("#rotationEditor").html(refreshRotationEditor());
 
     $("#mCreate").click(() => {
       //Update State
@@ -94,33 +93,40 @@ class UIRender {
 }
 
 const refreshTranslationEditor = () => {
-  return ``;
+  return `
+  <h3>X:</h3>
+  <input type="range" id="xTransalation" min="-50" max="50" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>
+  <hr>
+  <h3>Y:</h3>
+  <input type="range" id="yTransalation" min="-50" max="50" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>
+  <hr>
+  <h3>Z:</h3>
+  <input type="range" id="zTransalation" min="-50" max="50" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>`;
 };
+
 const refreshRotationEditor = () => {
-  return ``;
+  return `<label>X:</label>
+  <input type="range" id="xRotation" min="-360" max="360" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>
+  <label>Y:</label>
+  <input type="range" id="yRotation" min="-360" max="360" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>
+  <label>Z:</label>
+  <input type="range" id="zRotation" min="-360" max="360" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>`;
 };
+
 const refreshScaleEditor = () => {
-  return ``;
+  return `<input type="range" id="scale"  min="-5" max="5" value="0" ${_State.editor.surfaceCount > 0 ? "" : "disabled"}>`;
 };
 
 const refreshModelEditorButtons = () => {
   return `
-  <input type="button" id="mCreate" class="btn btn-primary"  value="Start a new Model" ${
-    _State.editor.activeModel ? "disabled" : ""
-  }>
-  <input type="button" id="mSave" class="btn btn-success" value="Save Current Model" ${
-    _State.getSurfaceCount() < 1 ? "disabled" : ""
-  }>`;
+  <input type="button" id="mCreate" class="btn btn-primary"  value="Start a new Model" ${_State.editor.activeModel ? "disabled" : ""}>
+  <input type="button" id="mSave" class="btn btn-success" value="Save Current Model" ${_State.getSurfaceCount() < 1 ? "disabled" : ""}>`;
 };
 
 const refreshSurfaceEditorButtons = () => {
   return `
-  <input type="button" id="sCreate" class="btn btn-primary" value="Start a new Surface" ${
-    !_State.editor.activeSurface && !_State.editor.activeModel ? "disabled" : ""
-  }>
-  <input type="button" id="sSave" class="btn btn-success" value="Save current Surface" ${
-    _State.getVertexCount() < 3 ? "disabled" : ""
-  }>`;
+  <input type="button" id="sCreate" class="btn btn-primary" value="Start a new Surface" ${!_State.editor.activeSurface && !_State.editor.activeModel ? "disabled" : ""}>
+  <input type="button" id="sSave" class="btn btn-success" value="Save current Surface" ${_State.getVertexCount() < 3 ? "disabled" : ""}>`;
 };
 
 const refreshInfo = () => {
@@ -132,8 +138,6 @@ const refreshInfo = () => {
     <hr>
     <h1>Properties</h1>
     <hr>
-    <p><input type="color" id="colorPicker" value="#00aaff" ${
-      _State.editor.activeSurface ? "" : "disabled"
-    }> Vertex Color</p>
+    <p><input type="color" id="colorPicker" value="#ff5900" ${_State.editor.activeSurface ? "" : "disabled"}> Vertex Color</p>
     `;
 };

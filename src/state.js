@@ -5,6 +5,8 @@ class State {
     };
     this.editor = {
       zIndex: 0,
+      angle: 0,
+      rotAxis: [1, 0, 0],
       modelCount: 0,
       vertexCount: 0,
       activeModel: false,
