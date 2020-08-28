@@ -13,6 +13,11 @@ class State {
       activeSurface: false,
       surfaceCount: 0,
     };
+    this.properties = {
+      RotationAxisX: [1, 0, 0],
+      RotationAxisY: [0, 1, 0],
+      RotationAxisZ: [0, 0, 1],
+    };
     this.Model = null;
     this.Surface = null;
   }
