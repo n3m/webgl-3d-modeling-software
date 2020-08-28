@@ -1,3 +1,5 @@
+const _State = new State();
+
 /**
  * Tasks:
  *  - Create 3D Figures
