@@ -15,15 +15,19 @@ class Surface {
 
     modelMatrix.setRotate(this.rotationX, _State.properties.RotationAxisX[0], _State.properties.RotationAxisX[1], _State.properties.RotationAxisX[2]);
 
-    if (angleY > 0) {
+    if (angleY > 0 || angleY < 0) {
+      console.log("Rotating y");
       modelMatrix.rotate(this.rotationY, _State.properties.RotationAxisY[0], _State.properties.RotationAxisY[1], _State.properties.RotationAxisY[2]);
     }
 
-    if (angleZ > 0) {
+    if (angleZ > 0 || angleZ < 0) {
+      console.log("Rotating  z");
       modelMatrix.rotate(this.rotationZ, _State.properties.RotationAxisZ[0], _State.properties.RotationAxisZ[1], _State.properties.RotationAxisZ[2]);
     }
 
     if (trasX > 0 || trasX < 0 || trasY > 0 || trasY < 0 || trasZ > 0 || trasZ < 0) {
+      console.log("Translating X Y or Z");
+
       modelMatrix.translate(trasX, trasY, trasZ);
     }
 

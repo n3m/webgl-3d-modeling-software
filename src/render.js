@@ -252,6 +252,6 @@ const refreshInfo = () => {
     <hr>
     <h1>Properties</h1>
     <hr>
-    <p><input type="color" id="colorPicker" value=${_State.lastValues.lastColorPickerValue} ${_State.editor.activeSurface ? "" : "disabled"}> Vertex Color</p>
+    <p><input type="color" id="colorPicker" value=${_State.lastValues.lastColorPickerValue} ${_State.editor.activeSurface && _State.editor.vertexCount < 1 ? "" : "disabled"}> Vertex Color</p>
     `;
 };
