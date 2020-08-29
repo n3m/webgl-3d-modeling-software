@@ -119,11 +119,11 @@ class Application {
     document.addEventListener("keydown", (e) => {
       switch (event.keyCode) {
         case 38: //A_Up
-          _State.updateZ(1);
+          _State.updateZ(0.2);
           UIRender.Refresh();
           break;
         case 40: //A_Down
-          _State.updateZ(-1);
+          _State.updateZ(-0.2);
           UIRender.Refresh();
           break;
         default:

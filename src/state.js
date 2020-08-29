@@ -14,7 +14,7 @@ class State {
       lastTransZValue: 0,
     };
     this.editor = {
-      zIndex: 0,
+      zIndex: 0.0,
       modelCount: 0,
       vertexCount: 0,
       activeModel: false,
@@ -43,7 +43,8 @@ class State {
   };
 
   updateZ = (val) => {
-    this.editor.zIndex += val;
+    this.editor.zIndex += parseFloat(val.toFixed(1));
+    this.editor.zIndex = parseFloat(this.editor.zIndex.toFixed(1));
   };
 
   getVertexCount = () => {
